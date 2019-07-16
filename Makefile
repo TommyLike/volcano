@@ -58,7 +58,7 @@ unit-test:
 e2e-test-kind:
 	./hack/run-e2e-kind.sh
 
-generate-yaml:
+generate-yaml: init
 	./hack/generate-yaml.sh
 
 
