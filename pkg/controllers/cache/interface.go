@@ -33,8 +33,7 @@ type Cache interface {
 	Update(obj *v1alpha1.Job) error
 	Delete(obj *v1alpha1.Job) error
 
-	AddPod(pod *v1.Pod) error
-	UpdatePod(pod *v1.Pod) error
+	AddOrUpdatePod(pod *v1.Pod) error
 	DeletePod(pod *v1.Pod) error
 
 	TaskCompleted(jobKey, taskName string) bool

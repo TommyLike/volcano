@@ -176,7 +176,7 @@ func (cc *Controller) addPod(obj interface{}) {
 		JobVersion: int32(dVersion),
 	}
 
-	if err := cc.cache.AddPod(pod); err != nil {
+	if err := cc.cache.AddOrUpdatePod(pod); err != nil {
 		glog.Errorf("Failed to add Pod <%s/%s>: %v to cache",
 			pod.Namespace, pod.Name, err)
 	}
@@ -240,7 +240,7 @@ func (cc *Controller) updatePod(oldObj, newObj interface{}) {
 		return
 	}
 
-	if err := cc.cache.UpdatePod(newPod); err != nil {
+	if err := cc.cache.AddOrUpdatePod(newPod); err != nil {
 		glog.Errorf("Failed to update Pod <%s/%s>: %v in cache",
 			newPod.Namespace, newPod.Name, err)
 	}

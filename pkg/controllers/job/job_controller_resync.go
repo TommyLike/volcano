@@ -82,7 +82,7 @@ func (cc *Controller) syncTask(oldTask *v1.Pod) error {
 		return fmt.Errorf("failed to get Pod <%v/%v>: err %v", oldTask.Namespace, oldTask.Name, err)
 	}
 
-	return cc.cache.UpdatePod(newPod)
+	return cc.cache.AddOrUpdatePod(newPod)
 }
 
 func (cc *Controller) resyncTask(task *v1.Pod) {

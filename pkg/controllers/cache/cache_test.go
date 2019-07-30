@@ -461,7 +461,7 @@ func TestJobCache_AddPod(t *testing.T) {
 			}
 		}
 
-		err := jobCache.AddPod(testcase.AddPod)
+		err := jobCache.AddOrUpdatePod(testcase.AddPod)
 		if err != nil && testcase.ExpectedErr != nil && err.Error() != testcase.ExpectedErr.Error() {
 			t.Errorf("Expected Error to be: %s, but got: %s in case %d", testcase.ExpectedErr.Error(), err.Error(), i)
 		}
@@ -564,7 +564,7 @@ func TestJobCache_DeletePod(t *testing.T) {
 		}
 
 		for _, pod := range testcase.AddPod {
-			err := jobCache.AddPod(pod)
+			err := jobCache.AddOrUpdatePod(pod)
 			if err != nil {
 				t.Errorf("Expected Error not occur when adding Adding Pod in case %d", i)
 			}
@@ -671,13 +671,13 @@ func TestJobCache_UpdatePod(t *testing.T) {
 		}
 
 		for _, pod := range testcase.AddPod {
-			err := jobCache.AddPod(pod)
+			err := jobCache.AddOrUpdatePod(pod)
 			if err != nil {
 				t.Errorf("Expected Error not occur when adding Adding Pod in case %d", i)
 			}
 		}
 
-		err := jobCache.UpdatePod(testcase.UpdatePod)
+		err := jobCache.AddOrUpdatePod(testcase.UpdatePod)
 		if err != nil && testcase.ExpectedErr != nil && err.Error() != testcase.ExpectedErr.Error() {
 			t.Errorf("Expected Error to be: %s, but got: %s in case %d", testcase.ExpectedErr.Error(), err.Error(), i)
 		}

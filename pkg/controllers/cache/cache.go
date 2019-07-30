@@ -171,7 +171,7 @@ func (jc *jobCache) Delete(obj *v1alpha1.Job) error {
 	return nil
 }
 
-func (jc *jobCache) AddPod(pod *v1.Pod) error {
+func (jc *jobCache) AddOrUpdatePod(pod *v1.Pod) error{
 	jc.Lock()
 	defer jc.Unlock()
 
@@ -188,27 +188,9 @@ func (jc *jobCache) AddPod(pod *v1.Pod) error {
 		jc.jobs[key] = job
 	}
 
-	return job.AddPod(pod)
-}
+	return job.AddOrUpdatePod(pod)
 
-func (jc *jobCache) UpdatePod(pod *v1.Pod) error {
-	jc.Lock()
-	defer jc.Unlock()
 
-	key, err := jobKeyOfPod(pod)
-	if err != nil {
-		return err
-	}
-
-	job, found := jc.jobs[key]
-	if !found {
-		job = &apis.JobInfo{
-			Pods: make(map[string]map[string]*v1.Pod),
-		}
-		jc.jobs[key] = job
-	}
-
-	return job.UpdatePod(pod)
 }
 
 func (jc *jobCache) DeletePod(pod *v1.Pod) error {
